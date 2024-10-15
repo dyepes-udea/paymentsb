@@ -1,0 +1,36 @@
+2024-10-14T19:49:12.821-05:00  INFO 15560 --- [paymentsB] [main] c.d.paymentsB.PaymentsBApplication       : Starting PaymentsBApplication using Java 22.0.1 with PID 15560 (C:\Users\DavidSRT\Documents\paymentsB\target\classes started by DavidSRT in C:\Users\DavidSRT\Documents\paymentsB)
+2024-10-14T19:49:12.821-05:00  INFO 15560 --- [paymentsB] [main] c.d.paymentsB.PaymentsBApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-10-14T19:49:13.963-05:00  INFO 15560 --- [paymentsB] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-14T19:49:14.166-05:00  INFO 15560 --- [paymentsB] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 185 ms. Found 4 JPA repository interfaces.
+2024-10-14T19:49:14.980-05:00  INFO 15560 --- [paymentsB] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-14T19:49:14.995-05:00  INFO 15560 --- [paymentsB] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-14T19:49:14.995-05:00  INFO 15560 --- [paymentsB] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2024-10-14T19:49:15.073-05:00  INFO 15560 --- [paymentsB] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-14T19:49:15.073-05:00  INFO 15560 --- [paymentsB] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2188 ms
+2024-10-14T19:49:15.461-05:00  INFO 15560 --- [paymentsB] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-14T19:49:15.523-05:00  INFO 15560 --- [paymentsB] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-10-14T19:49:15.555-05:00  INFO 15560 --- [paymentsB] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-14T19:49:15.900-05:00  INFO 15560 --- [paymentsB] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-14T19:49:15.930-05:00  INFO 15560 --- [paymentsB] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-14T19:49:16.227-05:00  INFO 15560 --- [paymentsB] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7c03f9d0
+2024-10-14T19:49:16.227-05:00  INFO 15560 --- [paymentsB] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-14T19:49:16.274-05:00  WARN 15560 --- [paymentsB] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-10-14T19:49:17.435-05:00  INFO 15560 --- [paymentsB] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-14T19:49:17.562-05:00  INFO 15560 --- [paymentsB] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-14T19:49:17.969-05:00  WARN 15560 --- [paymentsB] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-14T19:49:18.563-05:00  INFO 15560 --- [paymentsB] [main] efaultSchemaResourceGraphQlSourceBuilder : Loaded 1 resource(s) in the GraphQL schema.
+2024-10-14T19:49:18.781-05:00  INFO 15560 --- [paymentsB] [main] o.s.b.a.g.GraphQlAutoConfiguration       : GraphQL schema inspection:
+	Unmapped fields: {Query=[allPayments, paymentById, allCards, CardById, paymentMethodById, paymentStatusById], Card=[expirationDate], Mutation=[addPayment]}
+	Unmapped registrations: {Query.cardById=CardController#cardById[1 args], Query.allCard=CardController#allCard[0 args], Query.PaymentMethodById=PaymentMethodController#PaymentMethodById[1 args], Query.PaymentStatusById=PaymentStatusController#PaymentStatusById[1 args]}
+	Unmapped arguments: {CardController#addCard[6 args]=[expiryDate]}
+	Skipped types: []
+2024-10-14T19:49:18.813-05:00  INFO 15560 --- [paymentsB] [main] s.b.a.g.s.GraphQlWebMvcAutoConfiguration : GraphQL endpoint HTTP POST /graphql
+2024-10-14T19:49:19.454-05:00  INFO 15560 --- [paymentsB] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 16 endpoints beneath base path '/actuator'
+2024-10-14T19:49:19.563-05:00  INFO 15560 --- [paymentsB] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-14T19:49:19.579-05:00  INFO 15560 --- [paymentsB] [main] c.d.paymentsB.PaymentsBApplication       : Started PaymentsBApplication in 7.327 seconds (process running for 8.169)
+2024-10-14T19:49:19.917-05:00  INFO 15560 --- [paymentsB] [RMI TCP Connection(1)-192.168.1.25] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-14T19:49:19.917-05:00  INFO 15560 --- [paymentsB] [RMI TCP Connection(1)-192.168.1.25] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-14T19:49:19.917-05:00  INFO 15560 --- [paymentsB] [RMI TCP Connection(1)-192.168.1.25] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-10-14T19:51:03.113-05:00  INFO 15560 --- [paymentsB] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-14T19:51:03.127-05:00  INFO 15560 --- [paymentsB] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-14T19:51:03.136-05:00  INFO 15560 --- [paymentsB] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
