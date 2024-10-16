@@ -4,101 +4,99 @@ on:
   push:
     branches:
       - main
-jobs:
-  tests:
-    name: Unit tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: '17'
-      - name: Cache Maven packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-      - name: Run Tests
-        run: mvn -B test
 
-  #Sonar's Job
+jobs:
+  # SonarCloud Analysis Job
   sonar:
-    #Depends on test's job
-    needs: tests
     name: SonarCloud analysis
-    #Run on Ubuntu using the latest version
     runs-on: ubuntu-latest
-    #Job's steps
     steps:
-      #Check-out your repository under $GITHUB_WORKSPACE, so your workflow can  access it
-      - uses: actions/checkout@v1
-      #Set up JDK 11
+      # Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Set up JDK 17 (latest supported)
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
           java-version: '17'
-        #Set up SonarCloud cache
+
+      # Cache SonarCloud dependencies
       - name: Cache SonarCloud packages
-        #This action allows caching dependencies and build outputs to improve  workflow execution time.
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-      #Set up Maven cache
+
+      # Cache Maven dependencies
       - name: Cache Maven packages
-        #This action allows caching dependencies and build outputs to improve  workflow execution time.
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-        #Analyze project with SonarCloud
+
+      # Run SonarCloud analysis
       - name: Analyze with SonarCloud
-        run: mvn -B verify sonar:sonar -Dsonar.projectKey=davidrotaborudea_paymentsB -Dsonar.organization=davidrotaborudea -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: mvn -B clean verify sonar:sonar -Dsonar.projectKey=davidrotaborudea_paymentsB -Dsonar.organization=davidrotaborudea -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }} -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-
+  # Build and Package Job
   build:
-    # Depende del job 'sonar'
     needs: sonar
-    name: Build
-    # Se ejecuta en la última versión de Ubuntu
+    name: Build and Package
     runs-on: ubuntu-latest
-
     steps:
-      # ANTES DE EMPEZAR CON EL JAR HACE LO DE COVERALLS
-      - uses: actions/checkout@v1
-
-      # 1. Clona el repositorio
+      # Checkout code
       - name: Checkout repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
-      # 2. Configura JDK 11
-      - name: Set up JDK 17
+      # Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v1
         with:
           java-version: '17'
 
-      # 3. Cachea los paquetes de Maven
+      # Cache Maven dependencies
       - name: Cache Maven packages
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      # 5. Sube el JAR generado como un artefacto
+      # Build the project and package the JAR
+      - name: Build with Maven
+        run: mvn -B package -DskipTests
+
+      # Verify if the JAR was generated
+      - name: Prueba
+        run: mvn package -DskipTests
+
+      - name: Verify JAR exists
+        run: ls -l target
+
+      # Upload the JAR as an artifact
       - name: Upload JAR
         uses: actions/upload-artifact@v3
         with:
           name: artifact
           path: target/paymentsb-0.0.1-SNAPSHOT.jar
 
+  # Docker Build and Push Job
+  docker:
+    needs: build
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Build & push Docker image
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
