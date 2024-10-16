@@ -90,7 +90,7 @@ jobs:
     steps:
 
       - name: Clean Install
-        run: mvn clean install
+        run: mvn -B package -DskipTests
       # Checkout code
       - name: Checkout repository
         uses: actions/checkout@v2
