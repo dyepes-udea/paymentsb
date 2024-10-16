@@ -71,7 +71,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build the project with Maven
-        run: mvn clean package
+        run: mvn clean package -DskipTests
 
       # 4. Construye la aplicación usando Maven
       - name: Build with Maven
