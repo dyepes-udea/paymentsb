@@ -79,7 +79,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: artifact
-          path: target/paymentsB-0.0.1-SNAPSHOT.jar
+          path: target/paymentsb-0.0.1-SNAPSHOT.jar
 
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6
