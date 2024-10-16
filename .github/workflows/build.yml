@@ -72,10 +72,6 @@ jobs:
       - name: Build with Maven
         run: mvn -B package -DskipTests
 
-      # Verify if the JAR was generated
-      - name: Prueba
-        run: mvn package -DskipTests
-
       - name: Verify JAR exists
         run: ls -l target
 
