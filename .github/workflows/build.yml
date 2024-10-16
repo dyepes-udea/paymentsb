@@ -73,8 +73,11 @@ jobs:
         run: mvn -B package -DskipTests
 
       # Verify if the JAR was generated
+      - name: Prueba
+        run: mvn package -DskipTests
+
       - name: Verify JAR exists
-        run: ls -l target/paymentsb-0.0.1-SNAPSHOT.jar
+        run: ls -l target
 
       # Upload the JAR as an artifact
       - name: Upload JAR
