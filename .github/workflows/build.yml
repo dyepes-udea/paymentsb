@@ -89,8 +89,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Clean Install
+      - name: Build with Maven
         run: mvn -B package -DskipTests
+
+      - name: Verify JAR exists
+        run: ls -l target
       # Checkout code
       - name: Checkout repository
         uses: actions/checkout@v2
