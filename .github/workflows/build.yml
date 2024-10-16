@@ -79,7 +79,7 @@ jobs:
       - name: Download JAR
         uses: actions/download-artifact@v3
         with:
-          name: paymentsb-jar
+          name: paymentsb-0.0.1-SNAPSHOT.jar
           path: target/paymentsb-0.0.1-SNAPSHOT.jar
 
       - name: Build & push Docker image
