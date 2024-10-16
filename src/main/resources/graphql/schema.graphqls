@@ -15,7 +15,7 @@ type Card {
     cardType: String!
     cardHolderId: String!
     cardHolderName: String!
-    expirationDate: String!
+    expiryDate: String!
     payments: [Payment!]!
 }
 
@@ -50,5 +50,5 @@ type Mutation{
     addPayment(flightId: String!, cardId: String!, paymentMethodId: String!, paymentStatusId: String!, paymentReference: String!, amount: Float!): Payment
     addPaymentMethod(methodName: String!, urlImage: String!, active: Boolean!, referenceCode: String!): PaymentMethod
     addPaymentStatus(statusName: String!, message: String!): PaymentStatus
-    addCard(cardNumber: String!, cardCvc: String!, cardType: String!, cardHolderId: String!, cardHolderName: String!, expirationDate: String!): Card
+    addCard(cardNumber: String!, cardCvc: String!, cardType: String!, cardHolderId: String!, cardHolderName: String!, expiryDate: String!): Card
 }

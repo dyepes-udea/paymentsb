@@ -29,7 +29,7 @@ public class CardService {
         card.setCardNumber(cardNumber);
         card.setCardCvc(cardCvc);
         card.setCardType(cardType);
-        card.setCardHolderName(cardHolderId);
+        card.setCardHolderId(cardHolderId);
         card.setCardHolderName(cardHolderName);
         card.setExpiryDate(expiryDate);
 
