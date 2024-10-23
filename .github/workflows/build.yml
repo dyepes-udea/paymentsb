@@ -36,11 +36,11 @@ jobs:
         run: mvn sonar:sonar \
           -Dsonar.projectKey=dyepes-udea_paymentsb \
           -Dsonar.organization=dyepes-udea \
-          -Dsonar.token=${{ 7d865f91cd4136c4ebf940187df93cf87c2f635b }}
+          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
       - name: Upload JaCoCo coverage report to SonarCloud
         run: mvn sonar:sonar \
           -Dsonar.projectKey=dyepes-udea_paymentsb \
           -Dsonar.organization=dyepes-udea \
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
-          -Dsonar.token=${{ 7d865f91cd4136c4ebf940187df93cf87c2f635b }}
+          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
