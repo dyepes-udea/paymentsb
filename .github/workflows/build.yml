@@ -6,20 +6,23 @@ on:
       - main  # O la rama principal que prefieras
   pull_request:
     branches:
-      - main  # O la rama de destino de las pull requests
+      - main  # Para ejecutar en cada PR
 
 jobs:
-  build:
+  sonarcloud:
+    name: SonarCloud
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Recomendado para mejorar el informe de Sonar
 
-      - name: Set up JDK 17  # O la versión de Java que uses
+      - name: Set up JDK 17
         uses: actions/setup-java@v1
         with:
-          java-version: '17'
+          java-version: '17'  # Cambia a la versión de Java que uses
 
       - name: Cache Maven packages
         uses: actions/cache@v2
@@ -32,15 +35,14 @@ jobs:
       - name: Build and test with Maven
         run: mvn clean verify
 
-      - name: Run SonarCloud Scan
-        run: mvn sonar:sonar \
-          -Dsonar.projectKey=dyepes-udea_paymentsb \
-          -Dsonar.organization=dyepes-udea \
-          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Token de autenticación
 
-      - name: Upload JaCoCo coverage report to SonarCloud
-        run: mvn sonar:sonar \
-          -Dsonar.projectKey=dyepes-udea_paymentsb \
-          -Dsonar.organization=dyepes-udea \
-          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
-          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.organization=dyepes-udea
+            -Dsonar.projectKey=dyepes-udea_paymentsb
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
