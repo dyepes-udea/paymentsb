@@ -13,15 +13,14 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>paymentsB</name>
 	<description>Demo project for Spring Boot</description>
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <sonar.projectKey>dyepes-udea_paymentsb</sonar.projectKey>
-        <sonar.organization>dyepes-udea</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-        <sonar.java.binaries>target/classes</sonar.java.binaries>
-    </properties>
+	<properties>
+		<!-- Configuración de SonarCloud -->
+		<sonar.projectKey>dyepes-udea_paymentsb</sonar.projectKey>
+		<sonar.organization>dyepes-udea</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.java.binaries>target/classes</sonar.java.binaries>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -39,8 +38,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
-
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
