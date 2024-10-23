@@ -38,6 +38,7 @@ jobs:
 
   build:
     name: Build Application
+    needs: sonarcloud
     runs-on: ubuntu-latest
 
     steps:
