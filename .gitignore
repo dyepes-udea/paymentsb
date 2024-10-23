@@ -4,6 +4,7 @@ target/
 
 # Excepción: no ignorar el archivo de cobertura de JaCoCo
 !target/site/jacoco/jacoco.xml
+!target/classes
 
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
