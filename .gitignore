@@ -1,6 +1,10 @@
 HELP.md
+# Ignorar toda la carpeta target
 target/
+
+# Excepción: no ignorar el archivo de cobertura de JaCoCo
 !target/site/jacoco/jacoco.xml
+
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
