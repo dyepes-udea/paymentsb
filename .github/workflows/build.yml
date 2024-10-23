@@ -1,28 +1,25 @@
-name: SonarCloud Analysis
+name: Build and SonarCloud Analysis
 
 on:
   push:
     branches:
-      - main  # O la rama principal que prefieras
+      - main  # O la rama que prefieras
   pull_request:
     branches:
-      - main  # Para ejecutar en cada PR
+      - main
 
 jobs:
-  sonarcloud:
-    name: SonarCloud
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Recomendado para mejorar el informe de Sonar
+        uses: actions/checkout@v2
 
       - name: Set up JDK 17
         uses: actions/setup-java@v1
         with:
-          java-version: '17'  # Cambia a la versión de Java que uses
+          java-version: '17'
 
       - name: Cache Maven packages
         uses: actions/cache@v2
@@ -32,17 +29,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Build and test with Maven
-        run: mvn clean verify
+      - name: Build with Maven and Run SonarCloud
+        run: mvn clean verify sonar:sonar
+          -Dsonar.projectKey=dyepes-udea_paymentsb
+          -Dsonar.organization=dyepes-udea
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Token de autenticación
-
-        with:
-          args: >
-            -Dsonar.organization=dyepes-udea
-            -Dsonar.projectKey=dyepes-udea_paymentsb
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
